@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I love you</title>
+    <style>
+        body {
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: rgb(58, 188, 75,0.8);
+        }
+        img {
+            width: 400px;
+            border-radius: 10px;
+        }
+        #header {
+            background-color: #47865c;
+            color: #97b800;
+            text-align: center;
+            padding: 10px;
+        }
+        #word-of-the-day  {
+            text-align: center;
+            margin-top: 50px;
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        #days-left {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="header">
+    <h1 id="date-time"></h1>
+</div>
+
+<div id="word-of-the-day"></div>
+
+<div>
+    <img src="https://upload.wikimedia.org/wikipedia/en/9/97/Corduroy_book_cover.jpg" alt="Cat and dog">
+</div>
+
+<div id="days-left"></div>
+
+<script>
+    function updateDateTime() {
+        var currentDate = new Date();
+        var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', timeZone: 'Asia/Kuala_Lumpur' };
+        document.getElementById('date-time').textContent = currentDate.toLocaleDateString('en-US', options);
+    }
+
+    function calculateDaysPassed() {
+        var pageCreationDate = new Date('2024-02-10'); // Set the date when the page is created
+        var currentDate = new Date();
+        var timeDifference = currentDate - pageCreationDate;
+        var daysPassed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        return daysPassed % 30; // Get the remainder when divided by 30
+    }
+
+    function updateWordOfTheDay() {
+        var words = ["smile", "hair", "smell", "humor", "charm",
+        "patience","affection","dependability","artistry","love",
+        "glow","presence","quirks","insight","independence",
+        "simple dreams","warmness and gentleness","brown eyes","arms around me","cheeks when she smiles",
+        "face when she sees something cute. She's also cute.","hands in my hair. It makes me feel safe.", "heart. I am refreshed just being with her","lips. I only want them for myself.","voice. It is melatonin.",
+        "head on my chest. I've never felt happier than when she's close.",
+        "selective love for me. I feel like I occupy a special place in her heart. I will protect her",
+        "confidence in me. I wish she had the same in herself.",
+        "face when the sun grazes it. Even the moon and the planets are jealous of the way the sun obsesses over her.",
+        "my Reem, my Pumehana, my sweetheart, my love. Forever and always."];
+        var daysPassed = calculateDaysPassed();
+        var wordIndex = daysPassed; // Use the days passed as the index for the word array
+
+        document.getElementById('word-of-the-day').textContent = "I love her " + words[wordIndex];
+
+        var daysLeft = 30 - daysPassed;
+    document.getElementById('days-left').textContent = "Days left: " + daysLeft;
+    }
+
+    updateDateTime();
+    updateWordOfTheDay();
+
+    setInterval(function () {
+        updateDateTime();
+        updateWordOfTheDay();
+    }, 1000); // Update date-time and word of the day every second
+</script>
+
+</body>
+</html>
